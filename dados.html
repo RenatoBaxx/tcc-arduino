@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dados do Arduino</title>
+</head>
+<body>
+  <h1>Dados do Arduino</h1>
+  <p>Botão 1: <span id="botao1"></span></p>
+  <p>Botão 2: <span id="botao2"></span></p>
+
+  <script>
+    async function obterDadosArduino() {
+      try {
+        const response = await fetch('http://localhost:3000/dados');
+        const data = await response.json();
+        document.getElementById('botao1').textContent = data.botao1;
+        document.getElementById('botao2').textContent = data.botao2;
+      } catch (error) {
+        console.error('Erro ao obter dados do Arduino:', error);
+      }
+    }
+
+    setInterval(obterDadosArduino, 1000); // Atualiza os dados a cada segundo
+  </script>
+</body>
+</html>
